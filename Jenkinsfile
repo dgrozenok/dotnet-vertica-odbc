@@ -11,7 +11,7 @@ pipeline {
     }
   }
   environment {
-    registry = 'docker_hub_account/repository_name'
+    registry = 'dgrozenok/dotnet-vertica-odbc'
     registryCredential = 'dockerhub'
   }
 }
