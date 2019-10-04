@@ -12,7 +12,6 @@ pipeline {
         script {
           dockerImage = docker.build repository
         }
-
       }
     }
     stage('Push the image') {
@@ -22,7 +21,6 @@ pipeline {
             dockerImage.push()
           }
         }
-
       }
     }
     stage('Remove the image') {
