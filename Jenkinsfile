@@ -4,7 +4,7 @@ pipeline {
     stage('Build an image') {
       steps {
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + "/" + repository + ":$BUILD_NUMBER"
         }
 
       }
@@ -12,7 +12,7 @@ pipeline {
     stage('Push the image') {
       steps {
         script {
-          docker.withRegistry('https://dockeregistry.medeanalytics.com', registryCredential) {
+          docker.withRegistry('https://' + registry, registryCredential) {
             dockerImage.push()
           }
         }
@@ -21,13 +21,14 @@ pipeline {
     }
     stage('Remove the image') {
       steps {
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "docker rmi $repository:$BUILD_NUMBER"
       }
     }
   }
   environment {
-    registry = 'library/dotnet-vertica-odbc'
+    repository = 'library/dotnet-vertica-odbc'
     registryCredential = 'harbor'
     dockerImage = ''
+    registry = 'dockeregistry.medeanalytics.com'
   }
 }
