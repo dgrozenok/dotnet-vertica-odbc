@@ -26,7 +26,7 @@ pipeline {
     }
   }
   environment {
-    repository = 'library/dotnet-vertica-odbc'
+    repository = 'mede_create/dotnet-vertica-odbc'
     registryCredential = 'harbor'
     dockerImage = ''
     registry = 'dockeregistry.medeanalytics.com'
