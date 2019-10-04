@@ -1,9 +1,4 @@
 pipeline {
-  environment {
-    registry = 'library/dotnet-vertica-odbc'
-    registryCredential = 'harbor'
-    dockerImage = ''
-  }
   agent any
   stages {
     stage('Building an image') {
@@ -21,12 +16,18 @@ pipeline {
             dockerImage.push()
           }
         }
+
       }
     }
     stage('Remove Unused docker image') {
-      steps{
+      steps {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
+  }
+  environment {
+    registry = 'library/dotnet-vertica-odbc'
+    registryCredential = 'harbor'
+    dockerImage = ''
   }
 }
