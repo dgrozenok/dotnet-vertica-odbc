@@ -4,7 +4,7 @@ pipeline {
     stage('Build an image') {
       steps {
         script {
-          dockerImage = docker.build registry + "/" + repository + ":$BUILD_NUMBER"
+          dockerImage = docker.build repository
         }
 
       }
@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Remove the image') {
       steps {
-        sh "docker rmi $repository:$BUILD_NUMBER"
+        sh "docker rmi $repository"
       }
     }
   }
