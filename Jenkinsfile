@@ -1,4 +1,10 @@
 pipeline {
+  environment {
+    registry = 'https://dockeregistry.medeanalytics.com'
+    registryCredentials = 'harbor'
+    repository = 'mede_create/dotnet-vertica-odbc'
+    dockerImage = ''
+  }
   agent any
   stages {
     stage('Build an image') {
@@ -24,11 +30,5 @@ pipeline {
         sh "docker rmi $repository"
       }
     }
-  }
-  environment {
-    registry = 'https://dockeregistry.medeanalytics.com'
-    registryCredentials = 'harbor'
-    repository = 'mede_create/dotnet-vertica-odbc'
-    dockerImage = ''
   }
 }
