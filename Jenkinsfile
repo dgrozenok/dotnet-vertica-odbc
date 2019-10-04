@@ -9,6 +9,16 @@ pipeline {
 
       }
     }
+    stage('Push the image') {
+      steps {
+        script {
+          docker.withRegistry('', registryCredential) {
+            dockerImage.push()
+          }
+        }
+
+      }
+    }
   }
   environment {
     registry = 'dgrozenok/dotnet-vertica-odbc'
