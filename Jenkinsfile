@@ -1,28 +1,32 @@
 pipeline {
+  environment {
+    registry = 'library/dotnet-vertica-odbc'
+    registryCredential = 'harbor'
+    dockerImage = ''
+  }
   agent any
   stages {
     stage('Building an image') {
       steps {
         script {
-          docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
 
       }
     }
-    stage('Push the image') {
+    stage('Pushing the image') {
       steps {
         script {
-          docker.withRegistry('', registryCredential) {
+          docker.withRegistry('dockeregistry.medeanalytics.com', registryCredential) {
             dockerImage.push()
           }
         }
-
       }
     }
-  }
-  environment {
-    registry = 'dgrozenok/dotnet-vertica-odbc'
-    registryCredential = 'dockerhub'
-    image = ''
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
   }
 }
