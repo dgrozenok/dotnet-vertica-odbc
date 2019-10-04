@@ -23,5 +23,6 @@ pipeline {
   environment {
     registry = 'dgrozenok/dotnet-vertica-odbc'
     registryCredential = 'dockerhub'
+    image = ''
   }
 }
