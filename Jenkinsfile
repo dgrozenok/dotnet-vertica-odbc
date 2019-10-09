@@ -10,8 +10,6 @@ pipeline {
     stage('Build an image') {
       steps {
         script {
-          echo BRANCH_NAME
-          echo BUILD_NUMBER
           dockerImage = docker.build repository
         }
       }
