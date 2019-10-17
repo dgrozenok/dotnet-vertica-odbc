@@ -5,7 +5,7 @@ pipeline {
     repository = 'mede_create/dotnet-vertica-odbc'
     dockerImage = ''
   }
-  agent any
+  agent { label 'linux_docker' }
   stages {
     stage('Build an image') {
       steps {
