@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/runtime:3.0.0-buster-slim
+FROM mcr.microsoft.com/dotnet/core/runtime:3.0.1-buster-slim
 
 # ODBC driver manager
 RUN apt-get update \
